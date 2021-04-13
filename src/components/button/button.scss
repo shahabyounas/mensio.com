@@ -1,0 +1,47 @@
+$shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+$border-radius-sm: 4px;
+$button-success: #49919e;
+$button-danger: #f17167;
+$muted-text: #cfd8ea;
+$white: #fff;
+
+.button {
+    min-width: 4rem;
+    box-shadow: $shadow;
+    transition: all 0.3s ease 0s;
+    border-radius: $border-radius-sm;
+    padding: 0.5rem 0;
+    outline: none;
+    border: none;
+    color: $white;
+    text-transform: capitalize;
+    cursor: pointer;
+
+
+    &:hover {
+            background-color: #2EE59D;
+            color: #fff;
+    }
+
+    &--success {
+        background-color: $button-success;
+        padding: .75rem;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    &--danger {
+        align-self: start;
+        background-color: $button-danger;
+
+        &:hover {
+            background-color: #d00;
+        }
+    }
+
+    &--reset {
+        background-color: $button-success;
+        padding: .81rem;
+    }
+
+}

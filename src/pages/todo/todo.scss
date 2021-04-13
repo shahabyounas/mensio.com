@@ -1,10 +1,101 @@
+$todo-bg-color: #f6f7f9;
+$container-padding: 2rem;
+$button-success: #49919e;
+$button-danger: #f17167;
+$muted-text: #bcc8e3;
+$shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+$border-radius-sm: 4px;
+$border-color: #bcc8e3;
+
+
 .todo {
     display: flex;
     justify-content: center;
+    font-size: 1.1rem;
 
     &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         margin-top: 3rem;
-        min-width: 15rem;
-        background-color: azure;
+        min-width: 26rem;
+        background-color: $todo-bg-color;
+        padding: $container-padding;
+        border-radius: $border-radius-sm;
+        box-shadow: $shadow;
+
+    }
+
+    &__input-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0 1rem;
+    }
+
+    &__input {
+        width: 15rem;
+        font-size: 1rem;
+        height: 2.3rem;
+        border: 1px solid $border-color;
+        border-radius: $border-radius-sm;
+        margin: 1rem 0rem;
+        padding:0 0.5rem;
+        margin-left: 1rem;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: 0;
+        outline: none;
+
+        &::-webkit-input-placeholder {
+            color: $muted-text;
+        }
+    }
+
+    &__list-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 22rem;
+        height: 25rem;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+
+    &__list-wrapper {
+        margin: 0;
+        padding: 0;
+    }
+
+    &__list {
+        list-style-type: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;    
+        border-bottom: 1px solid $border-color;
+        margin: 0.5rem 1rem;
+        padding: 0.5rem 0;
+        text-align: start;
+    }
+
+    &__list-item-active:hover {
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    &__list-item::first-letter {
+        text-transform: uppercase;
+    }
+
+    &__mute-text {
+        color: $muted-text;
+        text-decoration-line: line-through;
     }
 }
