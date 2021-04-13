@@ -1,0 +1,10 @@
+.todo {
+    display: flex;
+    justify-content: center;
+
+    &__container {
+        margin-top: 3rem;
+        min-width: 15rem;
+        background-color: azure;
+    }
+}
