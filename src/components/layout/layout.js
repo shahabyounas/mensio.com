@@ -11,25 +11,22 @@ const Layout = (props) => {
   } = props;
 
   const { i } = useLocale();
-  const currentLocale  = window.localStorage.getItem('locale');
+  const currentLocale  = window.localStorage.getItem('locale') ? JSON.parse(window.localStorage.getItem('locale'))  : 'en';
   let defaultBtnLabel = 'English'
 
   if(currentLocale) {
-    defaultBtnLabel = JSON.parse(currentLocale) === 'en' ? 'English' : 'French'
+    defaultBtnLabel = currentLocale === 'en' ? 'English' : 'French'
   }
 
   const [buttonLable, setButtonLabel] = useState(defaultBtnLabel);
 
 
   const setLanguage = () => {
-    if(currentLocale) {
-       const newSetLng = JSON.parse(currentLocale) === 'en' ? 'fr' : 'en'
+       const newSetLng = currentLocale === 'en' ? 'fr' : 'en'
 
        setButtonLabel(newSetLng === 'en' ? 'English' :'French')
 
-       window.localStorage.setItem('locale', JSON.stringify(newSetLng));
-    }
-    
+       window.localStorage.setItem('locale', JSON.stringify(newSetLng));    
   }
 
   useEffect(() => {
