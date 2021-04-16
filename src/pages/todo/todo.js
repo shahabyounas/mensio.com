@@ -39,7 +39,9 @@ const TodoList =  () => {
 
    const itemSaved = await addItemAPI(item)
 
-    setItems([itemSaved, ...items])
+   if(itemSaved) {
+      setItems([itemSaved, ...items])
+   }
 
     setInputMessage('')
   }
