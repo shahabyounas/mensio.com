@@ -25,7 +25,7 @@ app.use(express.json({
     type: ['application/json', 'text/plain']
 }));
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, '../build')));
 
 
 app.get('/', (req, res) => res.send("Server is up and running"));
@@ -70,7 +70,7 @@ app.options('*', (req, res) => {
   });
 
   app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
   });
 
 const PORT = 3001;
