@@ -6,11 +6,11 @@ $muted-text: #cfd8ea;
 $white: #fff;
 
 .button {
-    min-width: 4rem;
+    min-width: 5rem;
     box-shadow: $shadow;
     transition: all 0.3s ease 0s;
     border-radius: $border-radius-sm;
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.5rem;
     outline: none;
     border: none;
     color: $white;
@@ -41,7 +41,14 @@ $white: #fff;
 
     &--reset {
         background-color: $button-success;
-        padding: .81rem;
+        padding: .75rem;
+        margin: 0 .3rem;
+    }
+
+    &--lang {
+        background-color: blue;
+        padding: .75rem;
+        margin: 0 .3rem;
     }
 
 }

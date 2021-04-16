@@ -1,32 +1,61 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../../components/button';
+import { getItemsAPI, addItemAPI, deleteItemAPI, updateItemAPI, deleteAllItemsAPI } from '../../api-gateway';
+import useLocale from '../../hooks/use-locale';
 import './todo.scss'
 
-const i = {
-  "add": "add",
-  "remove": 'remove',
-  "what-needs-to-be-done": "What needs to be done?",
-  "todo-list": "Todo",
-  "reset": "reset"
-}
 
-
-const TodoList = () => {
+const TodoList =  () => {
   const [inputMessage, setInputMessage] = useState('');
-  const list = ['Buy Milk', 'Walk the dog', 'pick up kids from school'];
-  const [items, setItems] = useState(list);
+  const { i } = useLocale();
+  const [items, setItems] = useState([]);
 
-  const addItem = () => {
-    setItems([inputMessage, ...items])
+
+  useEffect(() => {
+    const fetchItems = async () => {
+     const itemsList =  await getItemsAPI()
+     setItems(itemsList)
+    }
+
+    fetchItems();
+  }, [])
+
+  const activeItems = items.filter(item => !item.isCompleted && !item.isDeleted);
+  const completedItems = items.filter(item => item.isCompleted);
+
+
+  const addItem = async () => {
+
+    if(!inputMessage) {
+      return;
+    }
+
+    const item  = {
+      title: inputMessage
+    }
+
+
+   const itemSaved = await addItemAPI(item)
+
+    setItems([itemSaved, ...items])
+
     setInputMessage('')
   }
 
-  const deleteItem = (item) => {
-    setItems(items.filter(m => m !== item))
+  const deleteItem = async (item) => {
+    await deleteItemAPI(item);
+    setItems(items.filter(itm => itm._id !== item._id))
   }
 
-  const updateItem = (item) => {
-    setItems(items.filter(m => m !== item))
+  const updateItem = async (item) => {
+    const updatedItem = {
+      ...item,
+      isCompleted: true
+    }
+
+    await updateItemAPI(updatedItem);
+    
+    setItems(items.map(m => (m._id === item._id) ? updatedItem : m ))
   }
 
   const onClickAddButton = (e) => {
@@ -34,6 +63,11 @@ const TodoList = () => {
       addItem();
     }
   };
+
+  const deleteAllItems = async () => {
+    await deleteAllItemsAPI();
+    setItems([]);
+  }
 
   const onPressEnter = (e) => {
     if (e.target.value && (e.keyCode || e.which === 13 || e.key === 'Enter')) {
@@ -45,7 +79,7 @@ const TodoList = () => {
   return <div className="todo ">
     <div className="todo__container">
       <header className="todo__header" >
-        <span>{i['todo-list']}</span>
+        <span>{i('todo-list')}</span>
       </header>
 
       <div className="todo__input-wrapper">
@@ -55,26 +89,26 @@ const TodoList = () => {
             onKeyPress={(e) => onPressEnter(e)}
             value={inputMessage}
             className="todo__input"
-            placeholder={i['what-needs-to-be-done']}
+            placeholder={i('what-needs-to-be-done')}
           />
-          <Button name={i['add']} className="button--success" onClick={(e) => onClickAddButton(e)} />
+          <Button name={i('add')} className="button--success" onClick={(e) => onClickAddButton(e)} />
         </div>
         <div>
           <Button
-            name={i['reset']}
+            name={i('reset')}
             className="button--reset"
-            onClick={() => setItems([])}
+            onClick={() => deleteAllItems()}
           />
         </div>
       </div>
 
       <div className="todo__list-container" >
         <ul className="todo__list-wrapper">
-          {items.map(item => (
-            <li className="todo__list">
-              <span className="todo__list-item todo__list-item-active" onClick={() => updateItem(item)}>{item}</span>
+          {activeItems.map(item => (
+            <li className="todo__list" key={item._id}>
+              <span className="todo__list-item todo__list-item-active" onClick={() => updateItem(item)}>{item.title}</span>
               <Button
-                name={i['remove']}
+                name={i('remove')}
                 className="button--danger"
                 onClick={() => deleteItem(item)}
               />
@@ -83,8 +117,8 @@ const TodoList = () => {
         </ul>
 
         <ul className="todo__list-wrapper">
-          {items.map(item => (
-            <li className="todo__list todo__mute-text"> <span className="todo__list-item"> {item} </span>  </li>
+          {completedItems.map(item => (
+            <li className="todo__list todo__mute-text" key={item._id}> <span className="todo__list-item"> {item.title} </span>  </li>
           ))}
         </ul>
       </div>

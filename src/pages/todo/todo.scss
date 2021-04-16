@@ -18,7 +18,7 @@ $border-color: #bcc8e3;
         flex-direction: column;
         justify-content: center;
         margin-top: 3rem;
-        min-width: 26rem;
+        width: 29rem;
         background-color: $todo-bg-color;
         padding: $container-padding;
         border-radius: $border-radius-sm;
@@ -63,7 +63,8 @@ $border-color: #bcc8e3;
     &__list-container {
         display: flex;
         flex-direction: column;
-        max-width: 22rem;
+        max-width: 23rem;
+        min-width: 23rem;
         height: 25rem;
         overflow: hidden;
         overflow-y: scroll;
