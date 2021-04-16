@@ -2,7 +2,7 @@ const baseUrl = 'http://localhost:3001'
 const headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:3000, https://mensio.herokuapp.com/',
+        'Access-Control-Allow-Origin': '*',
 }
 
 const ITEM_ENDPOINT = '/item'
