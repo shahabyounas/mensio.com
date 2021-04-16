@@ -39,7 +39,7 @@ const TodoList =  () => {
 
    const itemSaved = await addItemAPI(item)
 
-   if(itemSaved) {
+   if(itemSaved && itemSaved.title) {
       setItems([itemSaved, ...items])
    }
 
