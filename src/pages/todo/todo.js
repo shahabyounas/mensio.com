@@ -10,18 +10,20 @@ const TodoList =  () => {
   const { i } = useLocale();
   const [items, setItems] = useState([]);
 
-
   useEffect(() => {
     const fetchItems = async () => {
      const itemsList =  await getItemsAPI()
-     setItems(itemsList)
+
+     if(itemsList && Array.isArray(itemsList) && itemsList.length){
+      setItems(itemsList)
+     }
     }
 
     fetchItems();
   }, [])
 
-  const activeItems = items.filter(item => !item.isCompleted && !item.isDeleted);
-  const completedItems = items.filter(item => item.isCompleted);
+  const activeItems = (items || []).filter(item => !item.isCompleted && !item.isDeleted);
+  const completedItems = (items || [] ).filter(item => item.isCompleted);
 
 
   const addItem = async () => {

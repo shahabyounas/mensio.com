@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 require('./db')
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -24,6 +25,7 @@ app.use(express.json({
     type: ['application/json', 'text/plain']
 }));
 
+app.use(express.static(path.join(__dirname, 'build')));
 
 
 app.get('/', (req, res) => res.send("Server is up and running"));
@@ -65,6 +67,10 @@ app.options('*', (req, res) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Add other headers here
     res.setHeader('Access-Control-Allow-Methods', 'POST, PUT, GET, DELETE'); // Add other methods here
     res.send();
+  });
+
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
   });
 
 const PORT = 3001;

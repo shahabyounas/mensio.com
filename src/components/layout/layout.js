@@ -33,7 +33,6 @@ const Layout = (props) => {
   }
 
   useEffect(() => {
-    console.log("render")
   }, [buttonLable])
   
 

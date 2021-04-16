@@ -11,6 +11,6 @@ mongoose.connect(uri, {
     useFindAndModify: false,
     useCreateIndex: true
 }).then((con) => {
-    console.log(`DB connection successful ${con.path}`);
+    console.log(`DB connection successful`);
   });
 
