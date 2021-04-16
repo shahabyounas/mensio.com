@@ -1,2 +1,0 @@
-# mensio.com
-Mensio App
