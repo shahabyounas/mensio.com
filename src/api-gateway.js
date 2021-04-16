@@ -17,7 +17,7 @@ const API_METHODS = {
 
 
 const ApiAdapter = (endPoint, { method , body }) => {
-    const url = `${endPoint}?format=json`
+    const url = `${baseUrl}${endPoint}?format=json`
     
     return fetch(url, {
         method: method,
