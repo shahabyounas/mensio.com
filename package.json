@@ -1,0 +1,29 @@
+{
+  "name": "mensio",
+  "version": "1.0.0",
+  "description": "Mensio Assignment backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shahabyounas/mensio.com.git"
+  },
+  "keywords": [
+    "healthcare"
+  ],
+  "author": "Shahab Younas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shahabyounas/mensio.com/issues"
+  },
+  "homepage": "https://github.com/shahabyounas/mensio.com#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.1.2",
+    "mongoose": "^5.12.4"
+  }
+}
